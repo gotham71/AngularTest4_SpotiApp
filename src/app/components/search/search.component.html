@@ -7,11 +7,14 @@
     <div class="col-md-9" *ngIf="term.length > 1">
       <h1 class="text-capitalize">{{ term}}</h1>
       <hr>
-      <ul>
-        <li *ngFor="let artista of _spotify.artistas">
-          {{ artista.name }}
-        </li>
-      </ul>
+
+      <div class="row">
+        <div class="col-md-3 text-center puntero" *ngFor="let artista of _spotify.artistas" [routerLink]="['/artist', artista.id]">
+          <img [src]="artista.images | sinfoto" class="img-thumbnail">
+          <p>{{ artista.name }}</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
