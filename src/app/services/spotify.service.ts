@@ -7,21 +7,42 @@ export class SpotifyService {
 
   artistas: any[] = [];
 
+  urlSpotify: string = 'https://api.spotify.com/v1/';
+  token: string = 'BQB9MrHCBxMVSAzZDuAtDid0WIJgY_JBjWJ1JBV5RZTQW0uNmpJueFPtIn6DQuPy0yqguCBmEtNv91Tql14';
+
   constructor(public http: HttpClient) {
-    console.log('Servicio Spotify listo');
+    console.log('Spotify service ready');
   }
 
-  getArtistas(term: string) {
-    let url = `https://api.spotify.com/v1/search?query=${ term }&type=artist&limit=20`;
-
+  private getHeaders() {
     let headers = new HttpHeaders({
-      'authorization': 'Bearer BQB9zi3bYaTTQV7Ye9iZkx5zKJtgxqouKgUzth90ekh5CsrDM_FvevW-QUFpXPtC8yJCoLkMbDicAM-Sw78'
+      'authorization': 'Bearer ' + this.token
     });
+    return headers;
+  }
+
+  getArtist( id: string) {
+    let url = `${ this.urlSpotify }artists/${ id }`;
+
+    let headers = this.getHeaders();
+    return this.http.get(url, { headers });
+    //   .map( (response: any) => {
+    //   this.artistas = response.artists.items;
+    //   return this.artistas;
+    // });
+  }
+
+  getArtists(term: string) {
+    let url = `${ this.urlSpotify }search?query=${ term }&type=artist&limit=20`;
+
+    let headers = this.getHeaders();
 
     return this.http.get(url, { headers }).map( (response: any) => {
       this.artistas = response.artists.items;
       return this.artistas;
     });
   }
+
+
 
 }
