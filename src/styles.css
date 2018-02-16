@@ -8,6 +8,7 @@ hr{
   border-color: white;
 }
 
+
 .jumbotron{
   background-color: #171717;
 }
@@ -42,6 +43,10 @@ hr{
 
 .img-circle{
   border-radius: 100%;
+}
+
+.img_50{
+  width: 50px;
 }
 
 

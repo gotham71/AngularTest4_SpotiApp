@@ -1,2 +1,48 @@
-{{ artist.name }}<br/>
-{{ artist.popularity }}
+<div class="container top30">
+
+  <div class="row">
+    <div class="col-md-3">
+      <img [src]="artist.images | sinfoto" class="img-thumbnail img-circle"/>
+    </div>
+    <div class="col-md-9">
+      <h1>{{ artist.name }}</h1>
+      <a [href]='artist.external_urls?.spotify' target="_blank" class="btn btn-outline-success">Open Spotify</a>
+      <button [routerLink]="['/search']" type="button" class="btn btn-outline-danger">Back</button>
+    </div>
+  </div>
+
+
+  <div class="row top30">
+    <div class="col-md-12">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Pic</th>
+            <th scope="col">Song Name</th>
+            <th scope="col">Popularity</th>
+            <th scope="col">Listen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let toptrack of toptracks, let i = index">
+            <td scope="row">{{ i + 1 }}</td>
+            <td><img [src]="toptrack.album.images | sinfoto" class="img_50"></td>
+            <td>{{ toptrack.name }}</td>
+            <td>{{ toptrack.popularity }}%</td>
+            <td>
+              <iframe [src]="toptrack.uri | domseguro:'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
